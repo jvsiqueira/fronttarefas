@@ -1,23 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { useEffect, useState } from "react";
+import "./App.css";
+import CadastrarTask from "./CadastrarTask";
+import ListarTask from "./ListarTask";
 function App() {
+  const [tarefas, setTarefas] = useState([]);
+
+  const tarefa = {
+    id: 0,
+    titulo: "",
+    descricao: "",
+    prazo: "",
+    priorodade: 0,
+  };
+
+  const [objTarefa, setObjTarefa] = useState(tarefa);
+
+  useEffect(() => {
+    fetch("http://localhost:8080/tarefas")
+      .then((retorno) => retorno.json())
+      .then((retornoConvertidoEmJson) => setTarefas(retornoConvertidoEmJson));
+  }, []);
+
+  const preencherDados = (e) => {
+    setObjTarefa({ ...objTarefa, [e.target.name]: e.target.value });
+    console.log(tarefa);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <p>{JSON.stringify(tarefa)}</p>
+      <CadastrarTask inserirDados={preencherDados}></CadastrarTask>
+      <ListarTask lista={tarefas}></ListarTask>
     </div>
   );
 }
