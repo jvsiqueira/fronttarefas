@@ -55,20 +55,23 @@ const App = () => {
     };
 
     try {
-      const retorno = fetch("http://localhost:8080/tarefas/" + id, options);
-
-      if (retorno.status == 200) {
-        console.log("removido");
-      }
+      fetch("http://localhost:8080/tarefas/" + id, options)
+        .then((retorno) => retorno.status)
+        .then((retornoS) => {
+          if (retornoS !== 200) {
+            alert("Falha ao Excluir!!");
+          } else {
+            alert("Cadastro removido com Sucesso!!");
+            fetch("http://localhost:8080/tarefas")
+              .then((retorno) => retorno.json())
+              .then((retornoConvertidoEmJson) =>
+                setData(retornoConvertidoEmJson)
+              );
+          }
+        });
     } catch (error) {
       console.log(error);
     }
-
-    fetch("http://localhost:8080/tarefas")
-      .then((retorno) => retorno.json())
-      .then((retornoConvertidoEmJson) => setData(retornoConvertidoEmJson));
-
-    window.location.reload(true);
   };
 
   return (

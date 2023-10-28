@@ -51,12 +51,20 @@ const ModalComp = ({ data, setData, dataEdit, isOpen, onClose }) => {
         body: dados,
       };
       try {
-        const retorno = fetch("http://localhost:8080/tarefas", options);
-
-        if (retorno.status == 200) {
-          console.log("atualizado");
-          window.location.reload(true);
-        }
+        fetch("http://localhost:8080/tarefas", options)
+          .then((retorno) => retorno.json())
+          .then((retornoJson) => {
+            if (retornoJson.mensagem !== undefined) {
+              alert(retornoJson.mensagem);
+            } else {
+              fetch("http://localhost:8080/tarefas")
+                .then((retorno) => retorno.json())
+                .then((retornoConvertidoEmJson) =>
+                  setData(retornoConvertidoEmJson)
+                );
+              alert("Cadastro Atualizado");
+            }
+          });
       } catch (error) {
         console.log(error);
       }
@@ -87,12 +95,20 @@ const ModalComp = ({ data, setData, dataEdit, isOpen, onClose }) => {
         body: dados,
       };
       try {
-        const retorno = fetch("http://localhost:8080/tarefas", options);
-
-        if (retorno.status == 201) {
-          console.log("atualizado");
-          window.location.reload(true);
-        }
+        fetch("http://localhost:8080/tarefas", options)
+          .then((retorno) => retorno.json())
+          .then((retornoJson) => {
+            if (retornoJson.mensagem !== undefined) {
+              alert(retornoJson.mensagem);
+            } else {
+              fetch("http://localhost:8080/tarefas")
+                .then((retorno) => retorno.json())
+                .then((retornoConvertidoEmJson) =>
+                  setData(retornoConvertidoEmJson)
+                );
+              alert("Cadastro Realizado");
+            }
+          });
       } catch (error) {
         console.log(error);
       }
