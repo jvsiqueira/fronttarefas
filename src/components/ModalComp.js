@@ -69,7 +69,6 @@ const ModalComp = ({ data, setData, dataEdit, isOpen, onClose }) => {
       } catch (error) {
         console.log(error);
       }
-      // data[dataEdit.index] = { id, titulo, descricao, prazo, prioridade };
     } else {
       let dados = JSON.stringify({
         titulo: titulo,

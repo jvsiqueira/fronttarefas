@@ -16,6 +16,8 @@ import { useEffect, useState } from "react";
 import ModalComp from "./components/ModalComp";
 
 const App = () => {
+  document.title = "Sua Tarefa";
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [data, setData] = useState([]);
   const [dataEdit, setDataEdit] = useState({});
@@ -29,13 +31,9 @@ const App = () => {
     fetch("http://localhost:8080/tarefas")
       .then((retorno) => retorno.json())
       .then((retornoConvertidoEmJson) => setData(retornoConvertidoEmJson));
-
-    //setData(db_costumer);
   }, [setData]);
 
   const handleRemove = (id) => {
-    //const newArray = data.filter((item) => item.email !== email);
-
     const options = {
       method: "DELETE",
       headers: {
