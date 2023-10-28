@@ -35,7 +35,7 @@ const ModalComp = ({ data, setData, dataEdit, isOpen, onClose }) => {
       const options = {
         method: "PUT",
         headers: {
-          "Content-Type": "aplication/x-www-form-urlencoded",
+          "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*",
           "Acess-Control-Allow-Methods": [
             "GET",
@@ -71,7 +71,7 @@ const ModalComp = ({ data, setData, dataEdit, isOpen, onClose }) => {
       const options = {
         method: "POST",
         headers: {
-          "Content-Type": "aplication/x-www-form-urlencoded",
+          "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*",
           "Acess-Control-Allow-Methods": [
             "GET",
@@ -89,7 +89,7 @@ const ModalComp = ({ data, setData, dataEdit, isOpen, onClose }) => {
       try {
         const retorno = fetch("http://localhost:8080/tarefas", options);
 
-        if (retorno.status == 200) {
+        if (retorno.status == 201) {
           console.log("atualizado");
           window.location.reload(true);
         }
