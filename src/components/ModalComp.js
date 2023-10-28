@@ -63,6 +63,7 @@ const ModalComp = ({ data, setData, dataEdit, isOpen, onClose }) => {
                   setData(retornoConvertidoEmJson)
                 );
               alert("Cadastro Atualizado");
+              onClose();
             }
           });
       } catch (error) {
@@ -107,6 +108,7 @@ const ModalComp = ({ data, setData, dataEdit, isOpen, onClose }) => {
                   setData(retornoConvertidoEmJson)
                 );
               alert("Cadastro Realizado");
+              onClose();
             }
           });
       } catch (error) {
@@ -142,7 +144,7 @@ const ModalComp = ({ data, setData, dataEdit, isOpen, onClose }) => {
             <Box>
               <FormLabel>Prazo</FormLabel>
               <Input
-                type="text"
+                type="date"
                 value={prazo}
                 onChange={(e) => setPrazo(e.target.value)}
               ></Input>
